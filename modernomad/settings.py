@@ -22,7 +22,7 @@ LOCALDEV = os.getenv("LOCALDEV") == "1"
 SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-OLGfXpLCkPPddMOXVlPXcz7Gmp")
 
 CANONICAL_URL = "http://localhost:8000"
-if LOCALDEV and os.getenv("DOMAIN_NAME"):
+if not LOCALDEV and os.getenv("DOMAIN_NAME"):
     CANONICAL_URL = "https://" + os.getenv("DOMAIN_NAME")
 
 STRIPE_PUBLISHABLE_KEY = os.getenv("STRIPE_PUBLISHABLE_KEY")
