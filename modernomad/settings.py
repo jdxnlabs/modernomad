@@ -12,6 +12,7 @@ ALLOWED_HOSTS = [
     "0.0.0.0",
     "127.0.0.1",
     "localhost",
+    "5.78.131.56",
     os.getenv("DOMAIN_NAME"),
 ]
 
