@@ -1,5 +1,20 @@
 # Docker Development Environment
 
+Copy the environment configuration file:
+
+```sh
+cp .env.example .env
+```
+
+Edit `.env` and set your passwords and API keys:
+
+```
+POSTGRES_PASSWORD=your_password_here
+STRIPE_SECRET_KEY=your_key_here
+STRIPE_PUBLISHABLE_KEY=your_key_here
+MAILGUN_API_KEY=your_key_here
+```
+
 Run:
 
 ```sh
@@ -36,16 +51,15 @@ optional, but means that the Python and Node dependencies will always remain up-
 
 ## Configuration
 
-You can configure environment variables using the `docker-compose.override.yml` file.
+You can configure environment variables using the `.env.example` file.
 
 Copy the example:
 
 ```sh
-cp docker-compose.override.example.yml docker-compose.override.yml
+cp .env.example .env
 ```
 
-And then edit `docker-compose.override.yml` at will. It's git-ignored, so no changes
-will show up on git.
+And then edit `.env` at will.
 
 To learn about what can be configured, see the [configuration documentation](configuration.md).
 

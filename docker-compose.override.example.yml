@@ -1,9 +1,0 @@
-# Copy this file into docker-compose.override.yml and docker compose will
-# automatically pick it up and integrate it when running docker compose up.
-
-services:
-  django:
-    environment:
-      STRIPE_SECRET_KEY: secret-key
-      STRIPE_PUBLISHABLE_KEY: secret-key
-      MAILGUN_API_KEY: secret-key

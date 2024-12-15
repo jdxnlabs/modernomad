@@ -193,10 +193,9 @@ a:hover {
 }
 
 .house-image {
-  height:225px;
+  height:auto;
   width:100%;
   padding:0;
-  object-fit: cover;
 }
 
 .house-name {
