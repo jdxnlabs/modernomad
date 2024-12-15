@@ -7,16 +7,16 @@ services:
     environment:
       # See docker-compose.override.example.yml on how to to override these
       DJANGO_SETTINGS_MODULE: modernomad.settings
-      DATABASE_URL: psql://postgres:postgres@postgres:5432/postgres
-      STRIPE_SECRET_KEY: xxx
-      STRIPE_PUBLISHABLE_KEY: xxx
-      MAILGUN_API_KEY: xxx
-      DEBUG: 1
-      LOCALDEV: 1
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY}
+      STRIPE_PUBLISHABLE_KEY: ${STRIPE_PUBLISHABLE_KEY}
+      MAILGUN_API_KEY: ${MAILGUN_API_KEY}
     stdin_open: true
     tty: true
     volumes:
       - "./:/app"
+    env_file:
+      - .env
 
   client:
     build:
@@ -31,14 +31,18 @@ services:
   postgres:
     image: postgres:15
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 5s
       timeout: 5s
       retries: 5
     environment:
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - pgdata:/var/lib/postgresql/data
 
+
 volumes:
   pgdata:
+
