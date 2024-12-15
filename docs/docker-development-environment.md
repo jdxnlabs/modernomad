@@ -1,5 +1,20 @@
 # Docker Development Environment
 
+Copy the environment configuration file:
+
+```sh
+cp .env.example .env
+```
+
+Edit `.env` and set your passwords and API keys:
+
+```
+POSTGRES_PASSWORD=your_password_here
+STRIPE_SECRET_KEY=your_key_here
+STRIPE_PUBLISHABLE_KEY=your_key_here
+MAILGUN_API_KEY=your_key_here
+```
+
 Run:
 
 ```sh
