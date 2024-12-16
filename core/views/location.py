@@ -10,6 +10,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.views.generic import DetailView
 from rules.contrib.views import PermissionRequiredMixin
+from django.conf import settings
 
 from core.data_fetchers import (
     SerializedNullResourceCapacity,

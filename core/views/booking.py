@@ -2,6 +2,7 @@ import datetime
 import json
 import logging
 from json import JSONEncoder
+from django.conf import settings
 
 import dateutil
 import stripe
