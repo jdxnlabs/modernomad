@@ -275,7 +275,7 @@ def BookingDetail(request, booking_id, location_slug):
     ):
         if not request.user.is_authenticated:
             return HttpResponseRedirect("/membership/")
-        if not view_helpers.has_active_membership(request.user):
+        if (not view_helpers.has_active_membership(request.user)) and settings.REQUIRE_MEMBERSHIP_ON_ACCOUNT_CREATION:
             msg = "Before booking you need to apply for a membership."
             messages.warning(request, msg)
             return HttpResponseRedirect("/membership")

@@ -79,7 +79,7 @@ class LocationDetail(PermissionRequiredMixin, DetailView):
         if not request.user.is_superuser:
             if not request.user.is_authenticated:
                 return HttpResponseRedirect("/membership/")
-            if not view_helpers.has_active_membership(request.user):
+            if (not view_helpers.has_active_membership(request.user)) and settings.REQUIRE_MEMBERSHIP_ON_ACCOUNT_CREATION:
                 return HttpResponseRedirect("/membership/")
         return super().dispatch(request, *args, **kwargs)
 
