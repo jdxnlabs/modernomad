@@ -539,6 +539,9 @@ class Resource(models.Model):
             return []
 
     def backings_this_room(self):
+        # Check if instance is saved first
+        if not self.pk:
+            return self.backings.none()  # Return empty QuerySet instead of list
         return self.backings.all()
 
     def current_backing(self):
@@ -550,18 +553,25 @@ class Resource(models.Model):
             return soonest_backing
 
     def current_backers(self):
+        if not self.pk:
+            return []
         if self.current_backing():
             return self.current_backing().users.all()
         else:
             return []
 
     def current_backers_for_display(self):
+        if not self.pk:
+            return []
         return [f"{u.first_name} {u.last_name}" for u in self.current_backers()]
 
     def scheduled_future_backings(self):
+        # Check if instance is saved first
+        if not self.pk:
+            return []
         today = timezone.localtime(timezone.now()).date()
         future = self.backings_this_room().filter(start__gt=today)
-        return future
+        return list(future)  # Convert QuerySet to list at the end
 
     def latest_backing(self):
         # latest backing *may* be in the past or the future...

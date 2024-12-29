@@ -15,7 +15,11 @@
     {% endif %}
 
     <div class="row-spacer">
-        <h5>Backed by {{form.instance.current_backers_for_display|join:", "|default:"no one"}}</h5>
+        {% with backers=form.instance.current_backers_for_display %}
+        <h5>
+            Backed by {% if backers %}{{backers|join:", "}}{% else %}no one{% endif %}
+        </h5>
+        {% endwith %}
         {% for b in form.instance.scheduled_future_backings %}
         <p><b>Scheduled backing changes</b>:
             {% for u in b.users.all %}
