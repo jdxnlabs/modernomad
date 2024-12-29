@@ -1511,12 +1511,12 @@ class UserProfile(models.Model):
         )
 
     def drft_spending_balance(self):
-        # returns balance from primary account only. the thesis is that users
-        # should move balances INTO their primary account to spend it.
-        account = self.get_or_create_primary_account(
-            currency=Currency.objects.get(name="DRFT")
-        )
-        return account.get_balance()
+        try:
+            drft_currency = Currency.objects.get(name="DRFT")
+            account = self.get_or_create_primary_account(currency=drft_currency)
+            return account.get_balance()
+        except Currency.DoesNotExist:
+            return 0  # Return 0 balance if DRFT currency doesn't exist
 
     def accounts(self):
         return list(self.user.accounts_owned.all()) + list(
