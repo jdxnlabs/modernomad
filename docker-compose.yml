@@ -3,7 +3,7 @@ services:
     build: .
     command: ["./manage.py", "runserver", "0.0.0.0:8000"]
     ports:
-      - "8000:8000"
+      - "80:8000"
     environment:
       # See docker-compose.override.example.yml on how to to override these
       DJANGO_SETTINGS_MODULE: modernomad.settings

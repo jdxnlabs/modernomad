@@ -245,6 +245,15 @@ ENABLE_SLACK = os.getenv("ENABLE_SLACK") == "1"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+CSRF_TRUSTED_ORIGINS = [
+    CANONICAL_URL,
+]
+
+CORS_ALLOWED_ORIGINS = [
+    CANONICAL_URL,
+]
+CORS_ALLOW_CREDENTIALS = True
+
 
 # Memberships settings
 
