@@ -54,7 +54,7 @@ def charge_booking(booking):
     return_url = f"{settings.CANONICAL_URL}/people/{booking.use.user.username}/"
 
     stripe.api_key = settings.STRIPE_SECRET_KEY
-    stripe.PaymentIntent.create(
+    charge = stripe.PaymentIntent.create(
         amount=amt_owed_cents,
         currency="usd",
         customer=booking.use.user.profile.stripe_customer_id,
@@ -62,6 +62,16 @@ def charge_booking(booking):
         description=descr,
         confirm=True,
         return_url=return_url,
+    )
+
+    # Create a Payment object to record the charge
+    return Payment.objects.create(
+        bill=booking.bill,
+        user=booking.use.user,
+        payment_service="Stripe",
+        payment_method=booking.use.user.profile.stripe_payment_method_id,
+        paid_amount=amt_owed,
+        transaction_id=charge.id,
     )
 
 
